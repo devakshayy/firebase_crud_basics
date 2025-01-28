@@ -1,6 +1,6 @@
 import { useState } from "react";
 import app from "../firebaseConfig";
-import { getDatabase,ref,get } from "firebase/database";
+import { getDatabase,ref,get, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
 
@@ -28,6 +28,13 @@ const UpdateRead = () => {
     }
   }
 
+  const deleteFruit = async (fruitsId) => {
+    const db = getDatabase(app);
+    const dbRef = ref(db,`nature/fruits/${fruitsId}`);
+    await remove(dbRef);
+    window.location.reload();
+  }
+
   return (
     <div className="flex flex-col items-center justify-center py-5 ">
         <h1 className="text-2xl font-semibold uppercase ">This is Update Read page</h1>
@@ -44,6 +51,11 @@ const UpdateRead = () => {
                 onClick={() => navigate(`/updatewrite/${item.fruitId}`)} 
                 className="px-1 bg-blue-400 ring-2 rounded-md m-2 uppercase text-white font-semibold">
                   Update
+             </button>
+             <button
+                onClick={() => deleteFruit(item.fruitId)} 
+                className="px-1 bg-red-500 ring-2 rounded-md m-2 uppercase text-white font-semibold">
+                  delete
              </button>
             </li>
           )) }

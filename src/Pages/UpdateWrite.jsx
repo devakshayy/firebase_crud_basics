@@ -5,44 +5,45 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const UpdateWrite = () => {
   
-  const {firebaseId} = useParams()  
+  const {firebaseId} = useParams();
+  
   const navigate = useNavigate() 
   const [inputValue1, setInputValue1] = useState("");
   const [inputValue2, setInputValue2] = useState("");
 
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      const db = getDatabase(app);
-      const dbRef = ref(db,`nature/fruits/${firebaseId}`);
-      const snapShot = await get(dbRef);
-  
-      if(snapShot.exists()){
-        const targetObject = snapShot.val();
-        setInputValue1(targetObject.fruitName);
-        setInputValue2(targetObject.fruitDefinition);
-      }else{
-        alert("an error Occured!!!")
-      }
-    }
+ useEffect(() => {
+     const fetchData = async () => {
+        const db = getDatabase(app);
+        const dbRef = ref(db,`nature/fruits/${firebaseId}`);
+        const snapShot = await get(dbRef);
+        if(snapShot.exists()){
+            const targetObject = snapShot.val();
+            setInputValue1(targetObject.fruitName);
+            setInputValue2(targetObject.fruitDefinition);
+        }else{
+          alert("An error occured")
+        }
+     }
 
-    fetchData()
-  }, [firebaseId])
+     fetchData()
+   
+ }, [firebaseId])
+ 
 
-  const overWriteData = async () => {
-     const db = getDatabase(app);
-     const newDocRef = ref(db,`nature/fruits/${firebaseId}`);
-     set(newDocRef, {
-       fruitName: inputValue1,
-       fruitDefinition: inputValue2
-     }).then( () => {
-       alert("Data saved successfully")
-     })
-     .catch((error) => {
-       alert("error:",error.message);
-     })
-  }
-
+ const overWriteData = async () => {
+   const db = getDatabase(app);
+   const updateDocRef = ref(db,`nature/fruits/${firebaseId}`);
+   set(updateDocRef, {
+     fruitName: inputValue1,
+     fruitDefinition: inputValue2
+   })
+   .then(() => {
+      alert("Item Updated successfully...")
+   })
+   .catch((error) => {
+      new Error();
+   })
+ }
   return (
     <div className="flex flex-col items-center justify-center py-5 ">
         <h1 className="text-2xl font-semibold uppercase ">This is Update write page</h1>
@@ -53,6 +54,7 @@ const UpdateWrite = () => {
             onClick={overWriteData}
             >Update
         </button>
+        
        <button  
           onClick={() => navigate("/read")}
           className="p-1 px-3 mt-5 bg-green-300 rounded-xl ring-4"
