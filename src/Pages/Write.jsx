@@ -18,7 +18,7 @@ const Write = () => {
         alert("error:",error.message);
       })
    }
-
+  
   return (
     <div className="flex flex-col items-center justify-center py-5 ">
         <h1 className="text-2xl font-semibold uppercase ">This is write page</h1>
