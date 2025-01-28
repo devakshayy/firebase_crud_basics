@@ -1,7 +1,9 @@
 import { useState } from "react"
 import app from "../firebaseConfig"
 import { getDatabase,ref,set,push } from "firebase/database"
-const Write = () => {   
+import { useNavigate } from "react-router-dom"
+const Write = () => {  
+   const navigate = useNavigate() 
    const [inputValue1, setInputValue1] = useState("");
    const [inputValue2, setInputValue2] = useState("");
     
@@ -28,7 +30,30 @@ const Write = () => {
         <button 
             className="border p-1 border-gray-800 rounded-lg"
             onClick={saveData}
-            >Save Data</button>
+            >Save Data
+        </button>
+        <button 
+          onClick={() => navigate("/")}
+          className="p-1 px-3 mt-4 bg-green-300 rounded-xl ring-4"
+          >HOME
+       </button>
+        <button 
+          onClick={() => navigate("/read")}
+          className="p-1 px-3 mt-4 bg-green-300 rounded-xl ring-4"
+          >READ
+       </button>
+       <br />
+        <button  
+          onClick={() => navigate("/updateread")}
+          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
+          >UPDATE READ
+        </button>
+        <br />
+        <button  
+          onClick={() => navigate("/updatewrite")}
+          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
+          >UPDATE WRITE
+        </button>
     </div>
   )
 }

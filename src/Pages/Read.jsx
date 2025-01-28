@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import app from "../firebaseConfig"
 import { getDatabase,ref,get } from "firebase/database"
+import { useNavigate } from "react-router-dom"
 
 const Read = () => {
-
+ const navigate = useNavigate();
  let [initialData, setInitialData] = useState([]);
 
   const fetchData = async () => {
@@ -36,6 +37,29 @@ const Read = () => {
             <li key={idx}>{item.fruitName} : {item.fruitDefinition}</li>
           )) }
        </ul>
+       <button 
+          onClick={() => navigate("/")}
+          className="p-1 px-3 mt-4 bg-green-300 rounded-xl ring-4"
+          >HOME
+       </button>
+       <br />
+       <button  
+          onClick={() => navigate("/write")}
+          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
+          >WRITE
+        </button>
+        <br />
+        <button  
+          onClick={() => navigate("/updateread")}
+          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
+          >UPDATE READ
+        </button>
+        <br />
+        <button  
+          onClick={() => navigate("/updatewrite")}
+          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
+          >UPDATE WRITE
+        </button>
     </div>
   )
 }
