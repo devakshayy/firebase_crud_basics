@@ -15,7 +15,7 @@ function App() {
           <Route path="/read" element={<Read/>} />
           <Route path="/write" element={<Write/> } />
           <Route path="/updateread" element={ <UpdateRead/> } />
-          <Route path="/updatewrite/:firebaseid" element={ <UpdateWrite/> } />
+          <Route path="/updatewrite/:firebaseId" element={ <UpdateWrite/> } />
        </Routes>
      </BrowserRouter>
     </>
