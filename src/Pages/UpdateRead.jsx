@@ -30,7 +30,7 @@ const UpdateRead = () => {
 
   return (
     <div className="flex flex-col items-center justify-center py-5 ">
-        <h1 className="text-2xl font-semibold uppercase ">This is UpdateRead page</h1>
+        <h1 className="text-2xl font-semibold uppercase ">This is Update Read page</h1>
         
         <button 
           onClick={fetchData}
@@ -39,7 +39,13 @@ const UpdateRead = () => {
        </button>
        <ul>
           {initialData.map((item,idx) => (
-            <li key={idx}>{item.fruitName} : {item.fruitDefinition} {item.fruitId}</li>
+            <li key={idx}>{item.fruitName} : {item.fruitDefinition} {item.fruitId}
+             <button
+                onClick={() => navigate(`/updatewrite/${item.fruitId}`)} 
+                className="px-1 bg-blue-400 ring-2 rounded-md m-2 uppercase text-white font-semibold">
+                  Update
+             </button>
+            </li>
           )) }
        </ul>
        <button 
@@ -54,17 +60,6 @@ const UpdateRead = () => {
           >READ
         </button>
         <br />
-       <button  
-          onClick={() => navigate("/write")}
-          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
-          >WRITE
-        </button>
-        <br />
-        <button  
-          onClick={() => navigate("/updatewrite")}
-          className="p-1 px-3 bg-green-300 rounded-xl ring-4"
-          >UPDATE WRITE
-        </button>
     </div>
   )
 }
